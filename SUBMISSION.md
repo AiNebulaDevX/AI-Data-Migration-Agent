@@ -35,7 +35,3 @@ The consultant sees a dashboard answering: *What is the agent doing? Does it nee
 ## AI vs deterministic logic
 
 AI suggests mappings and explains uncertainty. Deterministic code enforces schema validation, confidence thresholds, idempotent writes, retry limits, rollback, and audit. If Ollama is unavailable, the same confidence engine runs via an explicit fallback — never hidden as AI.
-
-## What I would build next
-
-Mapping memory across migrations, multi-entity support, per-field conflict picker in UI, file upload, Postgres + background workers, and RBAC for enterprise rollout.

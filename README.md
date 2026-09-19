@@ -170,17 +170,22 @@ pytest
 8. **Audit log** — Every mapping, transformation, escalation, and API push.
 9. **Rollback** — Removes all records pushed for this migration from the mock target.
 
-### Demo recording
+## Screenshots
 
-```bash
-# Terminal 1
-uvicorn backend.main:app --reload --port 8000
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
 
-# Terminal 2
-cd frontend && npm run dev
+### Escalations Interface
+![Escalations](screenshots/escalations.png)
 
-# Record screen while following demo steps above (~3 min)
-```
+### Agent Activity
+![Agent Activity](screenshots/activity.png)
+
+### Records View
+![Records](screenshots/records.png)
+
+### Audit Log
+![Audit Log](screenshots/audit.png)
 
 ## Target API
 
@@ -196,22 +201,6 @@ cd frontend && npm run dev
 - Stable keys: `migration_id + SHA256(record payload)`
 - Re-pushing the same record returns success without duplicate writes
 - Human overrides stored in `human_overrides` and applied on resume — never overwritten by AI
-
-## Known limitations
-
-- Single entity type (employees) and SQLite (demo scale)
-- LLM mapping suggestions augment but do not override deterministic confidence gates
-- No authentication (intentionally scoped for take-home)
-- File upload UI not implemented — demo uses bundled files via API
-
-## What would be built next
-
-- Multi-entity migrations (departments, locations)
-- File upload in UI + S3 ingestion
-- Mapping memory across client engagements
-- Role-based access for consultants vs admins
-- Production deployment with Postgres + job queue
-- Richer conflict resolution UI (pick winning source per field)
 
 ## Acceptance criteria checklist
 
@@ -241,6 +230,4 @@ cd frontend && npm run dev
 | AI + deterministic split | `llm_provider.py` + confidence | README | — | Architecture |
 | Open-source AI model | Ollama integration | README | — | Optional Ollama |
 | Tests | `tests/` | — | `pytest` | CI |
-
-| README | This file | — | — | — |
-| SUBMISSION.md | ≤1 page | — | — | — |
+| Screenshots | `screenshots/` directory | README | — | Screenshots section |
