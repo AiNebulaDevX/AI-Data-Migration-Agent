@@ -1,0 +1,13 @@
+# Optional — run backend only; start frontend separately with npm run dev
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./migration.db:/app/migration.db
+    environment:
+      - MIGRATION_OLLAMA_BASE_URL=http://host.docker.internal:11434

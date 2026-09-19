@@ -1,0 +1,5 @@
+emp_id,first_name,last_name,email,joining_date,department,salary
+101,Rahul,Sharma,rahul.sharma@gmail.com,2024-01-10,Engineering,85000
+102,Priya,Singh,priya.singh@gmail.com,2023-07-15,Finance,92000
+103,Amit,Verma,amit.verma@gmail.com,2022-11-01,Engineering,88000
+104,Neha,Gupta,neha.gupta@gmail.com,2024-03-20,HR,78000

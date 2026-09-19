@@ -1,0 +1,5 @@
+employee_id,first_name,last_name,salary,department
+EMP-101,John,Smith,85000,Engineering
+EMP-102,Rahul,Sharma,92000,Sales
+EMP-103,Maria,Garcia,88000,Marketing
+EMP-104,James,Wilson,78000,Engineering

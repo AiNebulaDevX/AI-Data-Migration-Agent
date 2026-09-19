@@ -1,0 +1,5 @@
+ID,Name,DateOfBirth,Email,Dept,Title
+EMP-101,John Smith,1990-05-15,john.smith@acme.com,Engineering,Software Engineer
+EMP-102,Rahul Sharma,1995-02-01,rahul@example.com,Sales,Account Executive
+EMP-106,Robert Chen,1985-07-22,robert.chen@acme.com,Finance,Analyst
+EMP-107,Invalid EmailUser,1990-01-01,not-an-email,Ops,Coordinator

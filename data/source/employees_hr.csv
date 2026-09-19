@@ -1,0 +1,6 @@
+employee_id,first_name,last_name,dob,email,phone,department,job_title,hire_date
+EMP-101,John,Smith,1990-05-15,john.smith@acme.com,555-0101,Engineering,Software Engineer,2018-03-01
+EMP-102,Rahul,Sharma,01/02/1995,rahul@example.com,555-0102,Sales,Account Executive,2020-06-15
+EMP-103,Maria,Garcia,15/08/1988,maria.garcia@acme.com,,Marketing,Marketing Manager,2015-11-20
+EMP-104,James,Wilson,1992-12-01,james.wilson@acme.com,555-0104,Engineering,Senior Developer,2019-01-10
+EMP-105,Priya,Patel,02-10-1998,priya.patel@acme.com,555-0105,HR,HR Specialist,2021-04-05

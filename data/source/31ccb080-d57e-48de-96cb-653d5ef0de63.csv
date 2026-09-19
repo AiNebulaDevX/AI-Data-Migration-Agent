@@ -1,0 +1,9 @@
+employee_id,first_name,last_name,Email,DateOfBirth,Dept,Title,salary
+EMP-001,Aarav,Sharma,aarav.sharma@example.com,1995-04-12,Engineering,Software Engineer,85000
+EMP-002,Priya,Verma,priya.verma@example.com,1993-08-25,Sales,Sales Manager,92000
+EMP-003,Rahul,Sharma,rahul@example.com,1989-11-03,Sales,Account Executive,78000
+EMP-004,Neha,Singh,neha.singh@example.com,1996-01-17,HR,HR Specialist,72000
+EMP-005,Arjun,Patel,arjun.patel@example.com,1992-06-30,Engineering,Senior Software Engineer,110000
+EMP-006,Simran,Kaur,simran.kaur@example.com,1997-09-14,Finance,Financial Analyst,76000
+EMP-007,Rohan,Gupta,rohan.gupta@example.com,1991-03-21,Engineering,Tech Lead,125000
+EMP-008,Ananya,Mehta,ananya.mehta@example.com,1994-12-08,Marketing,Marketing Specialist,70000
