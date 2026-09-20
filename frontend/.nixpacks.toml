@@ -2,4 +2,4 @@
 cmds = ["npm install", "npm run build"]
 
 [phases.start]
-cmd = "npx serve dist -p ${PORT:-8080}"
+cmd = "npx serve dist -l $PORT"
