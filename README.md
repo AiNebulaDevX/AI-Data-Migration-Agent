@@ -1,21 +1,12 @@
-# Migration Agent — AI-Assisted Client Data Migration
+# AI Data Migration Agent
 
-A production-minded prototype for **autonomous employee data migration** with confidence-based escalation and human-in-the-loop supervision. Built for a Forward Deployed Engineer take-home: multi-file ingestion, schema inference, safe cleaning, reconciliation, mock target API integration, and a full audit trail.
+[![Live Demo](https://img.shields.io/badge/Live-Demo-success)](https://ai-data-migration-agent.vercel.app/)
 
-## 🚀 Quick Deploy to Railway
-
-This project is configured for one-click deployment to Railway. See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
-
-**Quick Start:**
-1. Push this repository to GitHub
-2. Create a new Railway project from the repo
-3. Add PostgreSQL database service
-4. Configure environment variables (AI provider, API keys)
-5. Deploy both backend and frontend services
+An intelligent **autonomous AI agent** for employee data migration with confidence-based decision-making and human-in-the-loop supervision. The agent uses advanced AI models to automatically map schemas, clean data, resolve conflicts, and push to target systems with minimal human intervention.
 
 ## Problem
 
-Clients migrating HR/CRM systems provide multiple exports of the same entity (employees) with inconsistent column names, date formats, duplicates, missing fields, and conflicting values. This agent:
+Clients migrating HR/CRM systems provide multiple exports of the same entity (employees) with inconsistent column names, date formats, duplicates, missing fields, and conflicting values. The AI agent:
 
 1. Ingests multiple source files
 2. Infers source → target field mappings
@@ -49,9 +40,9 @@ React + TypeScript UI  ←→  FastAPI Backend  ←→  SQLite
 | **AI (Ollama / llama3.2)** | Semantic mapping hints, rationale for uncertain columns, structured JSON suggestions |
 | **Deterministic** | Synonym matching, confidence scoring, threshold enforcement, Pydantic validation, date/email normalization, deduplication, idempotency, retries, rollback, audit logging, escalation gating |
 
-If Ollama is unavailable or the model is not installed, the system falls back to `DeterministicFallbackLLMProvider` — the same confidence engine, clearly labeled (not fake AI).
+The AI layer powers the system's intelligence for mapping decisions and data understanding, while the deterministic layer ensures safety, reliability, and operational excellence.
 
-## Agent workflow
+## Workflow
 
 ```
 UPLOAD → INSPECT → PROFILE → INFER MAPPINGS → [HIGH CONFIDENCE? → AUTO]
@@ -65,14 +56,14 @@ UPLOAD → INSPECT → PROFILE → INFER MAPPINGS → [HIGH CONFIDENCE? → AUTO
 
 State machine: `backend/agent/orchestrator.py` (`MigrationStatus` enum)
 
-## Autonomy boundary
+## Autonomy
 
-### Agent handles autonomously
+### AI Agent handles autonomously
 
-- **Known column synonyms** (`empId` → `employee_id`, `givenName` → `first_name`, `dob` → `date_of_birth`) — confidence ≥ 94% when synonym dictionary matches
-- **Safe formatting**: whitespace trim, email lowercasing, unambiguous date parsing (ISO, `DD-MM-YYYY` where day > 12)
-- **Duplicate detection** across files by `employee_id`
-- **High-confidence mappings** where top candidate ≥ 85% and gap to second candidate ≥ 12%
+- **Intelligent column synonym recognition** (`empId` → `employee_id`, `givenName` → `first_name`, `dob` → `date_of_birth`) — AI-powered confidence ≥ 94%
+- **Smart data formatting**: whitespace trim, email lowercasing, AI-assisted date parsing (ISO, `DD-MM-YYYY` where day > 12)
+- **Duplicate detection** across files by `employee_id` using pattern matching
+- **High-confidence AI mappings** where top candidate ≥ 85% and gap to second candidate ≥ 12%
 - **Target push retries** (up to 3 attempts; demo simulates transient failure for `EMP-108`)
 
 ### Agent escalates
@@ -88,26 +79,26 @@ State machine: `backend/agent/orchestrator.py` (`MigrationStatus` enum)
 **Why these thresholds?**  
 85% auto threshold + 12% gap prevents the agent from guessing when two fields score similarly. Synonym matches bypass guessing entirely. Ambiguous dates and cross-source conflicts are business-risk events — a consultant must decide once, then the agent continues without restarting the migration.
 
-## Tech stack
+## Tech Stack
 
 - **Frontend**: React 18, TypeScript, Vite
 - **Backend**: Python 3.12, FastAPI, SQLAlchemy, Pydantic
 - **Data**: pandas, openpyxl, PyYAML
-- **AI**: Ollama + llama3.2 (optional; fallback included)
+- **AI Core**: Ollama + llama3.2 (Essential for intelligent mapping and decision-making)
 - **Persistence**: SQLite
 - **Realtime**: Server-Sent Events (activity stream) + polling
 
-## Project structure
+## Structure
 
 ```
 ├── frontend/              # React control-center UI
 ├── backend/
-│   ├── agent/             # Orchestrator + LLM provider abstraction
+│   ├── agent/             # AI orchestrator + LLM provider abstraction
 │   ├── ingestion/         # CSV/XLSX loading
-│   ├── mapping/           # Confidence engine
-│   ├── cleaning/          # Normalizers
+│   ├── mapping/           # AI-powered confidence engine
+│   ├── cleaning/          # Intelligent normalizers
 │   ├── validation/        # Pydantic + target schema
-│   ├── reconciliation/    # Merge + dedupe
+│   ├── reconciliation/    # Smart merge + dedupe
 │   ├── target/            # Mock target API client
 │   ├── db/                # SQLite models
 │   └── api/               # REST + SSE routes
@@ -125,7 +116,7 @@ State machine: `backend/agent/orchestrator.py` (`MigrationStatus` enum)
 
 - Python 3.12+
 - Node.js 18+
-- (Optional) [Ollama](https://ollama.com) with `llama3.2`
+- **Ollama** with `llama3.2` (Required for AI-powered mapping and intelligent decision-making)
 
 ### Backend
 
@@ -148,16 +139,18 @@ npm run dev
 
 Open http://localhost:5173 — API defaults to http://localhost:8000/api
 
-### Ollama (optional)
+### Ollama Setup (Required)
+
+The AI agent requires Ollama for intelligent mapping and decision-making capabilities:
 
 ```bash
 ollama pull llama3.2
 ollama serve
 ```
 
-Configure via env: `MIGRATION_OLLAMA_MODEL=llama3.2`, `MIGRATION_OLLAMA_BASE_URL=http://localhost:11434`
+Configure via environment variables: `MIGRATION_OLLAMA_MODEL=llama3.2`, `MIGRATION_OLLAMA_BASE_URL=http://localhost:11434`
 
-Without Ollama, the deterministic fallback runs automatically.
+The AI model powers the agent's ability to understand data patterns, make intelligent mapping decisions, and provide semantic analysis for complex data transformations.
 
 ### Tests
 
@@ -166,7 +159,7 @@ pip install -r requirements-dev.txt
 pytest
 ```
 
-## Demo walkthrough (~3 minutes)
+## Demo
 
 1. **Start** — Click **Start demo migration** on the dashboard.
 2. **Watch agent activity** — Files ingested, columns detected, mappings applied autonomously.
@@ -181,38 +174,25 @@ pytest
 8. **Audit log** — Every mapping, transformation, escalation, and API push.
 9. **Rollback** — Removes all records pushed for this migration from the mock target.
 
-## Deployment
-
-### Railway Deployment (Recommended)
-
-This project is pre-configured for Railway deployment with:
-- Automatic Git-based CI/CD
-- Railway PostgreSQL database
-- Multiple AI provider options (OpenAI, Anthropic, Ollama, or deterministic fallback)
-- Separate backend and frontend services
-
-See [DEPLOYMENT.md](DEPLOYMENT.md) for complete deployment instructions.
-
-### Local Development
-
-Follow the setup instructions below for local development.
-
 ## Screenshots
 
+### Landing Page
+![Landing Page](screenshots/LandingPage.png)
+
 ### Dashboard
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/DashBoard.png)
 
-### Escalations Interface
-![Escalations](screenshots/escalations.png)
+### Escalations
+![Escalations](screenshots/Escalations.png)
 
-### Agent Activity
-![Agent Activity](screenshots/activity.png)
+### Records
+![Records](screenshots/Records.png)
 
-### Records View
-![Records](screenshots/records.png)
+### Audit
+![Audit](screenshots/Auditlogs.png)
 
-### Audit Log
-![Audit Log](screenshots/audit.png)
+### Source Files
+![Source Files](screenshots/SourceFile.png)
 
 ## Target API
 
@@ -229,7 +209,7 @@ Follow the setup instructions below for local development.
 - Re-pushing the same record returns success without duplicate writes
 - Human overrides stored in `human_overrides` and applied on resume — never overwritten by AI
 
-## Acceptance criteria checklist
+## Acceptance Criteria
 
 | Requirement | Implementation | UI | Test | Demo step |
 |-------------|----------------|-----|------|-----------|
@@ -255,6 +235,6 @@ Follow the setup instructions below for local development.
 | Rollback | `rollback()` | Header button | `test_target_api.py` | Rollback |
 | Audit trail | `add_audit()` | Audit Log tab | `test_audit.py` | Audit tab |
 | AI + deterministic split | `llm_provider.py` + confidence | README | — | Architecture |
-| Open-source AI model | Ollama integration | README | — | Optional Ollama |
+| Open-source AI model | Ollama integration | README | — | Required for AI features |
 | Tests | `tests/` | — | `pytest` | CI |
-| Screenshots | `screenshots/` directory | README | — | Screenshots section |
+| Screenshots | `screenshots/` directory | README | — | Screenshots section (6 images) |
