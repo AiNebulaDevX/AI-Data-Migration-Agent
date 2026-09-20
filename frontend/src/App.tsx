@@ -54,6 +54,7 @@ type AuditEntry = {
   action: string;
   actor: string;
   record_id?: string;
+  decision?: string;
   details: Record<string, unknown>;
 };
 type SourceFile = { filename: string; row_count: number; columns: string[] };
@@ -338,9 +339,9 @@ function App() {
             >
               <span className="nav-icon">{n.icon}</span>
               {n.label}
-              {n.id === "Escalations" && openEscalations.length > 0 && (
+              {n.id === "Escalations" && openEscalations.length > 0 ? (
                 <span className="nav-badge">{openEscalations.length}</span>
-              )}
+              ) : null}
             </button>
           ))}
         </nav>
@@ -722,12 +723,12 @@ function App() {
                               <span className="mapping-label">Decision:</span>
                               <span className={`mapping-value mapping-${String(a.details.decision || "").toLowerCase()}`}>{String(a.details.decision || "")}</span>
                             </div>
-                            {a.details.reason && typeof a.details.reason === 'string' && (
+                            {a.details.reason && typeof a.details.reason === 'string' ? (
                               <div className="mapping-row">
                                 <span className="mapping-label">Reason:</span>
                                 <span className="mapping-value">{String(a.details.reason)}</span>
                               </div>
-                            )}
+                            ) : null}
                           </div>
                         ) : a.action === "ESCALATION_CREATED" ? (
                           <div className="escalation-detail">
@@ -735,24 +736,24 @@ function App() {
                               <span className="escalation-label">Type:</span>
                               <span className="escalation-value">{String(a.details.type || "")}</span>
                             </div>
-                            {a.details.field && typeof a.details.field === 'string' && (
+                            {a.details.field && typeof a.details.field === 'string' ? (
                               <div className="escalation-row">
                                 <span className="escalation-label">Field:</span>
                                 <span className="escalation-value">{String(a.details.field)}</span>
                               </div>
-                            )}
-                            {a.details.reason && typeof a.details.reason === 'string' && (
+                            ) : null}
+                            {a.details.reason && typeof a.details.reason === 'string' ? (
                               <div className="escalation-row">
                                 <span className="escalation-label">Reason:</span>
                                 <span className="escalation-value">{String(a.details.reason)}</span>
                               </div>
-                            )}
-                            {typeof a.details.confidence === 'number' && (
+                            ) : null}
+                            {typeof a.details.confidence === 'number' ? (
                               <div className="escalation-row">
                                 <span className="escalation-label">Confidence:</span>
                                 <span className="escalation-value">{(a.details.confidence * 100).toFixed(0)}%</span>
                               </div>
-                            )}
+                            ) : null}
                           </div>
                         ) : a.action === "ESCALATION_RESOLVED" ? (
                           <div className="escalation-detail">
@@ -760,18 +761,18 @@ function App() {
                               <span className="escalation-label">Decision:</span>
                               <span className={`escalation-value escalation-${String(a.decision || "").toLowerCase()}`}>{String(a.decision || "")}</span>
                             </div>
-                            {a.details.corrected_target_field && typeof a.details.corrected_target_field === 'string' && (
+                            {a.details.corrected_target_field && typeof a.details.corrected_target_field === 'string' ? (
                               <div className="escalation-row">
                                 <span className="escalation-label">Corrected Field:</span>
                                 <span className="escalation-value">{String(a.details.corrected_target_field)}</span>
                               </div>
-                            )}
-                            {a.details.corrected_value && typeof a.details.corrected_value === 'string' && (
+                            ) : null}
+                            {a.details.corrected_value && typeof a.details.corrected_value === 'string' ? (
                               <div className="escalation-row">
                                 <span className="escalation-label">Corrected Value:</span>
                                 <span className="escalation-value">{String(a.details.corrected_value)}</span>
                               </div>
-                            )}
+                            ) : null}
                           </div>
                         ) : a.action === "TARGET_PUSH" ? (
                           <div className="target-push-detail">
@@ -779,18 +780,18 @@ function App() {
                               <span className="target-label">Status:</span>
                               <span className={`target-value target-${String(a.details.status || "").toLowerCase()}`}>{String(a.details.status || "")}</span>
                             </div>
-                            {a.details.attempt !== undefined && (
+                            {a.details.attempt !== undefined ? (
                               <div className="target-row">
                                 <span className="target-label">Attempt:</span>
                                 <span className="target-value">{String(a.details.attempt)}</span>
                               </div>
-                            )}
-                            {a.details.message && typeof a.details.message === 'string' && (
+                            ) : null}
+                            {a.details.message && typeof a.details.message === 'string' ? (
                               <div className="target-row">
                                 <span className="target-label">Message:</span>
                                 <span className="target-value">{String(a.details.message)}</span>
                               </div>
-                            )}
+                            ) : null}
                           </div>
                         ) : (
                           <span className="audit-detail-raw">
