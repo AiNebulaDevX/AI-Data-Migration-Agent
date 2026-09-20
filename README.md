@@ -2,6 +2,17 @@
 
 A production-minded prototype for **autonomous employee data migration** with confidence-based escalation and human-in-the-loop supervision. Built for a Forward Deployed Engineer take-home: multi-file ingestion, schema inference, safe cleaning, reconciliation, mock target API integration, and a full audit trail.
 
+## 🚀 Quick Deploy to Railway
+
+This project is configured for one-click deployment to Railway. See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
+
+**Quick Start:**
+1. Push this repository to GitHub
+2. Create a new Railway project from the repo
+3. Add PostgreSQL database service
+4. Configure environment variables (AI provider, API keys)
+5. Deploy both backend and frontend services
+
 ## Problem
 
 Clients migrating HR/CRM systems provide multiple exports of the same entity (employees) with inconsistent column names, date formats, duplicates, missing fields, and conflicting values. This agent:
@@ -169,6 +180,22 @@ pytest
 7. **Records tab** — See `SUCCESS`, `RETRYING` (EMP-108 demo retry), `FAILED` states.
 8. **Audit log** — Every mapping, transformation, escalation, and API push.
 9. **Rollback** — Removes all records pushed for this migration from the mock target.
+
+## Deployment
+
+### Railway Deployment (Recommended)
+
+This project is pre-configured for Railway deployment with:
+- Automatic Git-based CI/CD
+- Railway PostgreSQL database
+- Multiple AI provider options (OpenAI, Anthropic, Ollama, or deterministic fallback)
+- Separate backend and frontend services
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for complete deployment instructions.
+
+### Local Development
+
+Follow the setup instructions below for local development.
 
 ## Screenshots
 

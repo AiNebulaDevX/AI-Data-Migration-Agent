@@ -53,3 +53,6 @@ htmlcov/
 *.tmp
 *.temp
 .cache/
+
+# Railway
+.railway/
